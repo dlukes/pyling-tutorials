@@ -110,9 +110,10 @@ mv bar baz
 cp baz qux
 # vymaže soubor (nenávratně!)
 rm qux
-# vymaže adresář, pokud je prázdný (nenávratně!)
+# vymaže (nenávratně!) adresář foo, pokud je prázdný
 rmdir foo
-# rekurzivně vymaže adresář a všechny soubory v něm (nenávratně!)
+# vymaže (nenávratně!) adresář foo, i když v něm jsou nějaké další vnořené
+# soubory a adresáře
 rm -r foo
 # vylistuje obsah adresáře
 ls
@@ -167,10 +168,19 @@ soubory užitečné ještě následující programy:
 - `diff`: vypíše rozdíly mezi dvěma textovými soubory
 - `less`: program na interaktivní prohlížení dlouhých souborů
 
-Je dobré si zapamatovat jména programů, ale to, jak se volají a jak fungují
-jejich přepínače, si vždy můžete přečíst v manuálu: `man jmeno_programu`.
-Některé programy naopak / navíc k tomu podporují přepínač `-h` nebo `--help`,
-který vám zobrazí podobné informace.
+### Kde najít nápovědu?
+
+V první řadě: ačkoli shell může na první pohled vypadat jako obskurní
+prostředí, k jehož používání by vás mohl nutit akorát nějaký temný šílenec, ve
+skutečnosti ho používá hodně lidí a na internetu se neustále ptají i na ty
+nejzákladnější věci :) Stačí se Googlu hezky zeptat např. ["how to remove
+non-empty directory"](lmgtfy.com/?&q=bash+how+to+remove+non-empty+directory).
+
+Pomoc lze ale nalézt i přímo na příkazové řádce. Je dobré si zapamatovat jména
+programů, ale to, jak se volají a jak fungují jejich přepínače, si vždy můžete
+přečíst v manuálu: `man jmeno_programu`. Některé programy naopak / navíc k tomu
+podporují přepínač `-h` nebo `--help`, takže příkaz `jmeno_programu --help` vám
+zobrazí podobné informace.
 
 Ovládání manuálu zobrazíte (přímo v manuálu) klávesou `h`. Důležité je
 vyhledávání (`/`, pak hledaný výraz, pak `Enter`; mezi výskyty přeskakujete
@@ -221,9 +231,11 @@ Lidsky řečeno, příkaz po příkazu:
 
 Díky rourám spolu mohou programy na příkazové řádce takto spolupracovat a
 vypořádat se kolektivně i s poměrně složitým úkolem, na který žádný z nich
-individuálně nebyl přímo stavěn. "Klikací" nebo "okýnkové" programy většinou
-tímto kreativním způsobem propojit nejdou, takže možnosti jejich využití jsou
-často omezené na to, co každý z nich umí samostatně.
+individuálně nebyl přímo stavěn. Každý program může být napsaný **v libovolném
+programovacím jazyce**, komunikují spolu jednoduše tak, že si skrz roury
+posílají data v podobě textu. "Klikací" nebo "okýnkové" programy většinou tímto
+kreativním způsobem propojit nejdou, takže možnosti jejich využití jsou často
+omezené na to, co každý z nich umí samostatně.
 
 ## Klávesové zkratky
 
