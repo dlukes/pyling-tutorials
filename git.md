@@ -18,7 +18,10 @@ adresáře `.git` (v kořenovém adresáři repozitáře).
 
 Krátký interaktivní tutorial: <https://try.github.io/>
 
-Delší úvodní text: <https://www.learnenough.com/git-tutorial>
+Delší úvodní texty:
+
+- <https://www.learnenough.com/git-tutorial>
+- <http://www-cs-students.stanford.edu/~blynn/gitmagic/index.html>
 
 Kompletní průvodce: <https://git-scm.com/book/en/v2>
 
