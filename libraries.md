@@ -30,18 +30,43 @@ pip install --user scrapy
 Teď už by všechno mělo proběhnout v pořádku a můžete knihovnu normálně používat
 v noteboocích (přes `import scrapy`).
 
-## ... vlastní knihovnu
+## ... vlastní modul (knihovnu)
 
 Dejme tomu, že máte nějaké funkce, které používáte opakovaně, a už vás nebaví
-je pořád kopírovat do každého nového notebooku, kde je chcete použít.
-Nejjednodušší řešení je vytvořit si vlastní modul, kam funkce uložíte a kde je
-budete centrálně spravovat a ladit. Modul pak stačí nainstalovat pomocí `pip`u,
-podobně jako výše.
+je pořád kopírovat do každého nového notebooku, kde je chcete použít. V takovém
+případě si můžete vytvořit vlastní modul (= normální textový soubor s příponou
+`.py`, obsahující kód v Pythonu), kam funkce uložíte a kde je budete centrálně
+spravovat a ladit.
+
+Nejjednodušší řešení je vytvořit modul v tom samém adresáři, kde jsou i skripty
+nebo notebooky, které jej využívají. Pak není třeba další konfigurace, všechno
+funguje samo, můžete modul importovat jako kterýkoli jiný. Jinými slovy,
+máme-li následující adresářovou strukturu...
+
+```
+moje_věci_v_pythonu
+├── super_modul.py
+├── značkování.ipynb
+├── regulární_výrazy.ipynb
+└── super_skript.py
+```
+
+... tak v kterémkoli z ostatních pythonovských souborů (ať už s příponou `.py`
+nebo `.ipynb`) můžeme modul `super_modul.py` importovat standardním způsobem:
+
+```python
+import super_modul
+# nebo from super_modul import x, je-li v modulu definováno x, atp.
+```
+
+Pokud ovšem chcete, aby byl modul modul dostupný kdekoli, je potřeba z něj
+vytvořit plnohodnotnou samostatnou knihovnu a nainstalovat ji pomocí `pip`u,
+podobně jako výše. Naštěstí to není o moc víc práce.
 
 Každá knihovna by měla bydlet ve vlastním adresáři, a ten by měl mít minimálně
 následující obsah:
 
-```sh
+```
 libovolné_jméno_adresáře
 ├── libovolné_jméno_modulu.py
 └── setup.py
@@ -50,7 +75,7 @@ libovolné_jméno_adresáře
 Soubor `libovolné_jméno_modulu.py` obsahuje váš kód, který chcete nainstalovat
 jako knihovnu a následně importovat: `import libovolné_jméno_modulu`.
 `setup.py` je standardní soubor, který definuje komponenty vaší knihovny a
-nějaká dodatečná metadata. Když balíčkový manažer `pip` nalezne v adresáře
+nějaká dodatečná metadata. Když balíčkový manažer `pip` nalezne v adresáři
 soubor `setup.py`, pochopí, že se jedná o pythonovskou knihovnu, a podle
 informací v tomto souboru se ji pokusí nainstalovat.
 
@@ -71,24 +96,27 @@ touch setup.py
 
 Ale můžeme tyto kroky provést i skrz klikací rozhraní Jupyteru.
 
-Pak do oba soubory v Jupyteru otevřeme a vepíšeme do nich zamýšlený obsah.
-Modul `mytools.py` bude obsahovat náš kód:
+Pak oba soubory v Jupyteru otevřeme a vepíšeme do nich zamýšlený obsah. Modul
+`mytools.py` bude obsahovat náš kód:
 
 ```python
 def vert_sents(path):
-    """Načte korpus jako seznam seznamů (= vět) ntic (= pozic)."""
+    """Load a corpus in the vertical format.
+
+    Returns a list of lists (= sentences) of tuples (= tokens).
+
+    """
     sents = []
     with open(path) as file:
         for line in file:
-            line = line.strip()
+            line = line.strip("\r\n")
             if line == "<s>":
                 sent = []
             elif line == "</s>":
                 sents.append(sent)
-            elif "\t" in line:
+            else:
                 word, _, tag = line.split("\t")
-                pos = tag[0]
-                sent.append((word, pos))
+                sent.append((word, tag[0]))
     return sents
 ```
 
@@ -101,6 +129,7 @@ Uloží se do speciální proměnné __doc__, přes níž ho pak níže můžeme
 předat funkci ``setup()``.
 
 """
+
 from setuptools import setup, find_packages
 
 setup(
@@ -137,14 +166,14 @@ setup(
 
 (Některé tyto údaje pochopitelně nejsou povinné, mělo by být intuitivně jasné,
 které lze celkem "beztrestně" vynechat. A pokud si nejste jisti, stačí některý
-z nich umazat a provést instalaci -- když to projde, vše je v pořádku :) )
+z nich umazat a provést instalaci, jak je popsáno níže -- když to projde, vše
+je v pořádku :) )
 
 Pak už stačí jen otevřít terminál a knihovnu nainstalovat pomocí `pip`u.
-(Nejprve znovu samozřejmě `source /opt/miniconda3.path`.) Použijeme přepínač
-`--editable`, díky němuž nemusíme po každé úpravě knihovnu znovu nainstalovat
-(naše úpravy se do instalované verze promítnou automaticky). Místo pouhého
-jména knihovny jako v případě `scrapy` zadáme cestu k adresáři, který knihovnu
-obsahuje:
+Použijeme přepínač `--editable`, díky němuž nemusíme po každé úpravě knihovnu
+znovu instalovat (naše úpravy se do instalované verze promítnou automaticky).
+Místo pouhého jména knihovny jako v případě `scrapy` zadáme cestu k adresáři,
+který knihovnu obsahuje:
 
 ```sh
 # buď plnou cestu (vlnovka ~ je zkratka do vašeho domácího adresáře, tj.
@@ -164,13 +193,14 @@ pip install --user --editable .
 # právě nacházíme)
 ```
 
-A můžete svou knihovnu vesele používat v noteboocích.
+A můžete svou knihovnu vesele používat v noteboocích, skriptech apod.
 
 ## Douška na závěr
 
-Jak jsem říkal na hodině, při opakovaném `import`u nějaké knihovny se už Python
-znovu na disk nedívá a zdrojové soubory knihovny nečte, jen si ověří, že
+Pozor, při opakovaném `import`u nějaké knihovny v rámci jednoho sezení se už
+Python znovu na disk nedívá a zdrojové soubory knihovny nečte, jen si ověří, že
 knihovna už byla dříve importována, a vrátí vám tu verzi, kterou už má nahranou
-v paměti. Může tak vzkniknout problém, pokud v knihovně objevíte při práci s ní
+v paměti. Může tak vzniknout problém, pokud v knihovně objevíte při práci s ní
 nějakou chybu, upravíte ji a chcete ji importovat znovu. V takovém případě je
-potřeba Python restartovat (tj. použít funkci *Restart kernel*).
+potřeba Python restartovat (tj. v případě notebooku použít funkci *Restart
+kernel*).
