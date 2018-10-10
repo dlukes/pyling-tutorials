@@ -158,14 +158,16 @@ lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 # ... a v adresáři mám jediný soubor, skript grep.py, na jehož vývoji
 # jsem doposud pracoval (vztahují se k němu ony tři commity vypsané
 # výše)
-lukes@jupyter:~/grep$ ls -l total 4 -rwxr-xr-x 1 lukes pfc 51 Mar 9 11:07
-grep.py
+lukes@jupyter:~/grep$ ls -l
+total 4
+-rwxr-xr-x 1 lukes pfc 51 Mar  9 11:07 grep.py
 
 # rozhodnu se, že bych mohl přidat readme (= soubor se základními
 # informacemi o projektu), ale zatím si tím nejsem úplně jistý, tak
 # ho nebudu dávat na svou hlavní větev (master), ale založím si kvůli
 # tomu novou, kterou si návodně nazvu readme
-lukes@jupyter:~/grep$ git checkout -b readme Switched to a new branch 'readme'
+lukes@jupyter:~/grep$ git checkout -b readme
+Switched to a new branch 'readme'
 
 # když u příkazu git checkout vynecháme parametr <id>, checkout
 # defaultně proběhne tam, kde je HEAD. touto operací se tedy stav
@@ -178,13 +180,17 @@ lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 
 # teď si otevřu textový editor a vytvořím soubor README.md. ověřím si,
 # že v adresáři skutečně je:
-lukes@jupyter:~/grep$ ls -l total 4 -rwxr-xr-x 1 lukes pfc 51 Mar 9 11:07
-grep.py -rw-r--r-- 1 lukes pfc 0 Mar 9 11:07 README.md
+lukes@jupyter:~/grep$ ls -l
+total 4
+-rwxr-xr-x 1 lukes pfc 51 Mar  9 11:07 grep.py
+-rw-r--r-- 1 lukes pfc  0 Mar  9 11:07 README.md
 
 # zdá se že ano, i git status mi hlásí, že se objevil nový soubor,
 # o kterém zatím Git nic neví ("untracked")
-lukes@jupyter:~/grep$ git status On branch readme Untracked files: (use "git
-add <file>..." to include in what will be committed)
+lukes@jupyter:~/grep$ git status
+On branch readme
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
 
         README.md
 
@@ -194,8 +200,10 @@ nothing added to commit but untracked files present (use "git add" to track)
 lukes@jupyter:~/grep$ git add README.md
 
 # ... a změny commitnu
-lukes@jupyter:~/grep$ git commit -m "Add readme" [readme 145568b] Add readme 1
-file changed, 0 insertions(+), 0 deletions(-) create mode 100644 README.md
+lukes@jupyter:~/grep$ git commit -m "Add readme"
+[readme 145568b] Add readme
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README.md
  
 # jak vypadá historie nyní? větev readme se posunula o jeden commit před
 # větev master (obsahuje oproti ní navíc právě soubor README.md)
@@ -207,9 +215,10 @@ lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 
 # teď se můžu přesunout zpět na větev master a nechat v sobě zrát
 # rozhodnutí, zda README.md definitivně zahrnout nebo ne
-lukes@jupyter:~/grep$ git checkout master Switched to branch 'master' Your
-branch is ahead of 'origin/master' by 1 commit. (use "git push" to publish your
-local commits)
+lukes@jupyter:~/grep$ git checkout master
+Switched to branch 'master'
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
 
 # vrátil jsem se v historii zpět, HEAD znovu ukazuje na větev master...
 lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate                                                                                                                                                                        
@@ -219,17 +228,20 @@ lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 * 46d3b32 Hello world
 
 # ... a odpovídá tomu i obsah adresáře: README.md je pryč
-lukes@jupyter:~/grep$ ls -l total 4 -rwxr-xr-x 1 lukes pfc 51 Mar 9 11:07
-grep.py
+lukes@jupyter:~/grep$ ls -l
+total 4
+-rwxr-xr-x 1 lukes pfc 51 Mar  9 11:07 grep.py
 
 # naštěstí ne nenávratně, vím, že ho mám uložené v commitu 145568b
 # pod větví readme a můžu si ho kdykoli vyvolat. nyní se můžu vrátit
 # k práci na kódu, upravím soubor grep.py a zkontroluju git status:
-lukes@jupyter:~/grep$ git status On branch master Your branch is ahead of
-'origin/master' by 1 commit. (use "git push" to publish your local commits)
-Changes not staged for commit: (use "git add <file>..." to update what will be
-committed) (use "git checkout -- <file>..." to discard changes in working
-directory)
+lukes@jupyter:~/grep$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
 
         modified:   grep.py
 
