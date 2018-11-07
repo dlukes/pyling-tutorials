@@ -5,6 +5,14 @@ Various materials for the Python course for linguists I teach at [Charles
 University, Faculty of Arts][cufa]. Some in English, some in Czech. Feel free
 to peruse!
 
+Winter semester
+---------------
+
+1. [Basics -- a Python crash course](basics.ipynb)
+
+Summer semester
+---------------
+
 License
 -------
 
