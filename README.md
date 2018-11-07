@@ -8,7 +8,7 @@ to peruse!
 Winter semester
 ---------------
 
-1. [Basics -- a Python crash course](basics.ipynb)
+1. [Basics -- a Python crash course](python_crash_course.ipynb)
 
 Summer semester
 ---------------
