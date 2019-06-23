@@ -1,18 +1,54 @@
 # Úvod do příkazové řádky
 
-Proč se vůbec učit pracovat s příkazovou řádkou, když všechno můžeme udělat
-pohodlně z notebooku v Pythonu? S notebookem můžeme pracovat pouze v rámci
-Pythonu, ale existuje mnoho programů na zpracování dat, které nemají pohodlné
-rozhraní (knihovnu) pro použití z Pythonu. A Python sice teoreticky umí
-všechno, protože v každém programovacím jazyce lze naprogramovat cokoli, ale
-některé věci byste museli sami reimplementovat, takže v praxi je **mnohem lepší
-použít existující nástroj**, který bude navíc **vyladěný** co se rychlosti a
-správnosti týče.
+Proč se vůbec učit pracovat s příkazovou řádkou? Nestačí nám umět
+používat Python? Bohužel nestačí. Existuje mnoho užitečných programů,
+které nemají šikovné rozhraní (knihovnu) pro použití z Pythonu, a
+většinou už vůbec nemají grafické rozhraní (typu spustím program z
+nabídky *Start*, otevře se okýnko -- prostě GUI, *Graphical User
+Interface*). Zato ale mají rozhraní pro příkazovou řádku (*command
+line*, *Command Line Interface* -- CLI). Z čistě praktického hlediska
+nám tedy schopnost práce s příkazovou řádkou dává přístup k nástrojům,
+které bychom jinak použít jednoduše nemohli.
 
-Příkazová řádka umožňuje **spolupráci programů napsaných v různých
-programovacích jazycích**. V Pythonu pracujeme s datovými strukturami jako je
-seznam nebo slovník, na příkazové řádce si programy navzájem posílají jen čistý
-text, žádné složitější datové struktury.
+To se vztahuje i na nástroje vlastní -- není nic jednoduššího, než
+napsat program pro příkazovou řádku, třeba v Pythonu, ke splnění
+libovolného drobného úkolu, na který opakovaně narážíte. Konkrétní
+příklad: občas chci ve wordovském dokumentu umazat u komentářů časové
+značky, aby nebylo poznat, že jsem se ke komentování dostal až na
+poslední chvíli ;) Word sám to neumožňuje, ale stačí na to [poměrně
+krátký skript v
+Pythonu](https://gist.github.com/dlukes/2b5c2a163cd8adba420aaae0c8ea2c00).
+Kdybych mu chtěl udělat GUI (okýnkové rozhraní), musel bych se s tím
+patlat o něco déle, ale CLI je v podstatě hotové hned.
+
+Velkou předností příkazové řádky je, že umožňuje jednoduchou
+**spolupráci programů napsaných v různých programovacích jazycích**. V
+Pythonu pracujeme s datovými strukturami jako je seznam nebo slovník, na
+příkazové řádce si programy navzájem posílají jen čistý text (resp.
+bajty), žádné složitější datové struktury.
+
+Jak tato spolupráce v praxi funguje? Základním stavebním kamenem je
+možnost zřetězit programy pomocí tzv. **rour**, tj. poslat výstupní data
+jednoho programu jinému programu jako data vstupní.  Např. když v
+následující podobě zavolám program `echo`, výstupem budou čtyři řádky
+textu:
+
+```sh
+user@host:~$ echo -e "ant\nbee\ncrow\ndeer"
+ant
+bee
+crow
+deer
+```
+
+Ale tento výstup můžu pomocí roury poslat na vstup programu `grep`, který
+vyfiltruje např. řádky, které obsahují sekvenci písmen "ee":
+
+```sh
+user@host:~$ echo -e "ant\nbee\ncrow\ndeer" | grep ee
+bee
+deer
+```
 
 Různé operační systémy mají různé příkazové řádky s různými funkcemi. Operační
 systémy z rodiny UNIX, jako je např. Linux nebo macOS, kladou tradičně velký
@@ -25,10 +61,15 @@ Windows"](https://docs.microsoft.com/en-us/windows/wsl/about). Pozor,
 **defaultní příkazová řádka ve Windows je něco jiného** a funkcionalitu, kterou
 níže probereme, nenabízí.
 
-Níže následuje jen stručný přehled toho nejdůležitějšího, aby se člověk na
-příkazové řádce necítil ztracený. Pro zvídavé / náročnější doporučuju on-line
-knihu zdarma [*Learn Enough Command Line to Be
-Dangerous*](https://www.learnenough.com/command-line-tutorial).
+Níže následuje jen stručný přehled toho nejdůležitějšího, aby se člověk
+na příkazové řádce necítil ztracený. Pro zvídavé / náročnější doporučuju
+on-line knihu zdarma [*Learn Enough Command Line to Be
+Dangerous*](https://www.learnenough.com/command-line-tutorial). Ovšem
+ministr zdravotnictví varuje: při pravidelném (po)užívání je příkazová
+řádka návyková a můžou se dostavit návaly vzteku, když jste pak
+příležitostně donuceni ji opustit a zmateně myšovat po běžných GUI
+aplikacích, protože mít všechno na dosah ruky na klávesnici je k
+nezaplacení ;)
 
 ## Terminál a shell
 
@@ -57,7 +98,7 @@ i o grafických rozhraních, jako je třeba prostředí Windows, mluví jako o
 ## Adresářová struktura
 
 Ve Windows jsou jednotlivá úložiště (disky) samostatná, každé má svoje písmeno
-(např. `C:\`). Pod nimi se pak nachází hiearchický strom adresářů.
+(např. `C:\`). Pod nimi se pak nachází hierarchický strom adresářů.
 
 Oproti tomu na Linuxu vyrůstá strom adresářů z jediného kořenového adresáře,
 `/`, a klade se menší důraz na to, které části stromu jsou na kterých fyzických
@@ -125,13 +166,14 @@ ls -l -h
 ls -lh
 ```
 
-Programy posílají svoje výsledky na tzv. **standardní výstup** (`STDOUT`),
-případně si mohou brát data ze **standardního vstupu** (`STDIN`). Standardní
-výstup normálně skončí prostřednictvím terminálu na naší obrazovce, ale je též
-možné ho poslat do souboru (`>soubor.txt` přepíše `soubor.txt` novým obsahem,
-`>>soubor.txt` na jeho konec zapíše další data), případně prostřednictvím tzv.
-**roury** (`|`) na **standardní vstup jiného programu**. Tímto způsobem je
-možné sestavit celé **potrubí** na zpracování dat.
+Programy posílají svoje výsledky na tzv. **standardní výstup**
+(`STDOUT`), případně si mohou brát data ze **standardního vstupu**
+(`STDIN`). Standardní výstup normálně skončí prostřednictvím terminálu
+na naší obrazovce, ale je též možné ho poslat do souboru (`>soubor.txt`
+přepíše `soubor.txt` novým obsahem, `>>soubor.txt` na jeho konec zapíše
+další data), případně prostřednictvím tzv. **roury** (`|`, angl.
+*pipe*, čes. též "**pajpa**") na **standardní vstup jiného programu**.
+Tímto způsobem je možné sestavit celé **potrubí** na zpracování dat.
 
 Většina programů na zpracování textu si umí brát vstup buď ze souboru, který
 jim zadáme jako parametr, nebo právě ze standardního vstupu (pak není třeba
@@ -191,7 +233,7 @@ vpřed, `Ctrl+b` = stránka zpět, jinak šipky) a `q` (tou manuál zase opustí
 ## Složitější příklad
 
 Zkusme propojit výše zmíněné dílčí programy dohromady a s jejich pomocí
-vytvořit frekvenční distribuci 100 nejčastějších synsémantik v
+vytvořit frekvenční distribuci 100 nejčastějších autosémantik v
 `syn2015_sample`:
 
 ```sh

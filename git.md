@@ -204,10 +204,10 @@ lukes@jupyter:~/grep$ git commit -m "Add readme"
 [readme 145568b] Add readme
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 README.md
- 
+
 # jak vypadá historie nyní? větev readme se posunula o jeden commit před
 # větev master (obsahuje oproti ní navíc právě soubor README.md)
-lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate                                                                                                                                                                        
+lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 * 145568b (HEAD -> readme) Add readme
 * 88ea481 (master) Print sys.argv
 * d620f6e (origin/master) Shebang
@@ -221,7 +221,7 @@ Your branch is ahead of 'origin/master' by 1 commit.
   (use "git push" to publish your local commits)
 
 # vrátil jsem se v historii zpět, HEAD znovu ukazuje na větev master...
-lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate                                                                                                                                                                        
+lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 * 145568b (readme) Add readme
 * 88ea481 (HEAD -> master) Print sys.argv
 * d620f6e (origin/master) Shebang
@@ -257,10 +257,10 @@ lukes@jupyter:~/grep$ git commit -m "Implement grep"
 
 # historie repozitáře se nyní rozvětvila: větev master obsahuje
 # změny, které neobsahuje větev readme, a naopak
-lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate                                                                                                                                                                        
+lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 * 97d1767 (HEAD -> master) Implement grep
 | * 145568b (readme) Add readme
-|/  
+|/
 * 88ea481 Print sys.argv
 * d620f6e (origin/master) Shebang
 * 46d3b32 Hello world
@@ -274,19 +274,19 @@ Merge made by the 'recursive' strategy.
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 README.md
 
-# a skutečně, README.md se v adresáři zase objeví 
+# a skutečně, README.md se v adresáři zase objeví
 lukes@jupyter:~/grep$ ls -l
 total 4
 -rwxr-xr-x 1 lukes pfc 53 Mar  9 11:09 grep.py
 -rw-r--r-- 1 lukes pfc  0 Mar  9 11:10 README.md
 
 # a do historie se zapíše zmínka, že došlo k mergi
-lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate                                                                                                                                                                        
+lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 *   fe5be7a (HEAD -> master) Merge branch 'readme'
-|\  
+|\
 | * 145568b (readme) Add readme
 * | 97d1767 Implement grep
-|/  
+|/
 * 88ea481 Print sys.argv
 * d620f6e (origin/master) Shebang
 * 46d3b32 Hello world
@@ -301,10 +301,10 @@ Deleted branch readme (was 145568b).
 # symbolické jméno readme
 lukes@jupyter:~/grep$ git log --oneline --graph --all --decorate
 *   fe5be7a (HEAD -> master) Merge branch 'readme'
-|\  
+|\
 | * 145568b Add readme
 * | 97d1767 Implement grep
-|/  
+|/
 * 88ea481 Print sys.argv
 * d620f6e (origin/master) Shebang
 * 46d3b32 Hello world
