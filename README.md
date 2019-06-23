@@ -8,10 +8,28 @@ to peruse!
 Winter semester
 ---------------
 
-1. [Basics -- a Python crash course](python_crash_course.ipynb)
+- [Basics -- a Python crash course](python_crash_course.ipynb)
+- [Make the most out of Jupyter notebooks](jupyter_magic.ipynb)
+- [Examining pronunciation variants with CMUdict](cmudict.ipynb)
+- [Plain text and Unicode](unicode.ipynb)
+- [Regular expressions in Python](regex.ipynb)
+- [Computing collocation strength with the Dice score](collocations.ipynb)
 
 Summer semester
 ---------------
+
+- [An introduction to the command line](command_line_intro.md)
+- [Using Python on the command line](python_on_the_cli.md)
+- [An introduction to version control using git](git.md)
+- [Installing additional libraries and writing your own](libraries.md)
+- [Implement your own POS-tagger](pos_tagging.ipynb)
+- [Writing object-oriented code](object_oriented.ipynb)
+- [Supervised ML -- classification tasks](classification.ipynb)
+
+Extra
+-----
+
+- [Ever wondered how regular expressions work?](diy_regex.ipynb)
 
 License
 -------
