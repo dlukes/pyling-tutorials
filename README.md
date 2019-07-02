@@ -39,5 +39,5 @@ Copyright © 2018--present [ÚČNK][cnc]/David Lukeš
 Distributed under the [GNU General Public License v3][gplv3]
 
 [cnc]: http://korpus.cz
-[gplv3]: http://www.gnu.org/licenses/gpl-3.0.en.html}
+[gplv3]: http://www.gnu.org/licenses/gpl-3.0.en.html
 [cufa]: https://www.ff.cuni.cz/
