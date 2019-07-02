@@ -1,5 +1,12 @@
 # Skripty (programy) v Pythonu pro příkazovou řádku
 
+**POZNÁMKA:** Tento dokument podává jen základní informace k tomuto tématu.
+Úplnější příklad užitečného programu je k dispozici v repozitáři
+[dlukes/grep](https://github.com/dlukes/grep), kde je prostřednictvím
+[komentované historie *commitů*](https://github.com/dlukes/grep/commits/master)
+popsána postupná implementace jednoduchého klonu programu `grep` sloužícího k
+prohledávání plain-textových souborů.
+
 ## Můj první skript
 
 Skript v Pythonu je jen textový soubor, který obsahuje sekvenci příkazů, tak
@@ -27,7 +34,7 @@ režimu, který funguje jako takový primitivní *notebook*:
 
 ```sh
 lukes@jupyter:~$ python3
-Python 3.6.4 (default, Feb 23 2018, 09:48:34) 
+Python 3.6.4 (default, Feb 23 2018, 09:48:34)
 [GCC 5.4.0 20160609] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> a = 1 + 1
@@ -131,7 +138,7 @@ To pak pochopitelně nefunguje, protože *shell* program `python3` na uvedeném
 místě jednoduše nenajde, tak ho nemůže ani spustit:
 
 ```sh
-lukes@jupyter:~$ ./hello.py 
+lukes@jupyter:~$ ./hello.py
 bash: ./hello.py: /někdo/to/rád/jinde/python3: bad interpreter: No such file or directory
 ```
 
