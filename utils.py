@@ -1,30 +1,37 @@
+import re
 import json
+from pathlib import Path
 from urllib.parse import quote
 
 
 class TableOfContents:
-
-    def __init__(self, fname):
-        toc = ["<ul>"]
-        with open(fname) as file:
+    def __init__(self, nb_path):
+        nb_path = Path(nb_path)
+        with nb_path.open() as file:
             nb = json.load(file)
-        prev_level = 1
+        toc = []
+        prev_level = 0
         for cell in nb["cells"]:
             if cell["cell_type"] != "markdown":
                 continue
-            for line in cell["source"]:
-                if line.startswith("#"):
-                    level, title = line.strip().split(maxsplit=1)
-                    level = len(level)
-                    optional_slash = "/" if prev_level > level else ""
-                    for _ in range(abs(prev_level - level)):
-                        toc.append(f"<{optional_slash}ul>")
-                    anchor = quote(title, safe=" ").replace(" ", "-")
-                    toc.append(f'<li><a href="#{anchor}">{title}</a></li>')
-                    prev_level = level
-        toc.append("</ul>")
+            for heading in re.finditer(
+                r"^(#+)\s*(.+)$",
+                "".join(cell["source"]),
+                flags=re.MULTILINE,
+            ):
+                level, heading = len(heading.group(1)), heading.group(2)
+                level_diff = level - prev_level
+                prev_level = level
+                ul = "<ul>" if level_diff > 0 else "</ul>"
+                toc.extend(ul for _ in range(abs(level_diff)))
+                anchor = quote(heading.replace(" ", "-"))
+                toc.append(f'<li><a href="#{anchor}">{heading}</a></li>')
+        toc.extend("</ul>" for _ in range(prev_level))
         self.toc = "\n".join(toc)
+        self.path = nb_path
 
-    # def __repr__(self):
+    def __repr__(self):
+        return f"<{self.__class__.__name__} for {self.path.name!r}>"
+
     def _repr_html_(self):
         return self.toc
