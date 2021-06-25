@@ -29,6 +29,8 @@ Summer semester
 Extra
 -----
 
+- [Speeding up with vectorization: a case study in document
+  deduplication](deduplicate_vectorized.ipynb)
 - [Ever wondered how regular expressions work?](diy_regex.ipynb)
 
 License
