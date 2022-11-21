@@ -16,14 +16,13 @@ libovolného drobného úkolu, na který opakovaně narážíte. Konkrétní
 příklad: občas chci ve wordovském dokumentu umazat u komentářů časové
 značky, aby nebylo poznat, že jsem se ke komentování dostal až na
 poslední chvíli ;) Word sám to neumožňuje, ale stačí na to [poměrně
-krátký skript v
-Pythonu](https://gist.github.com/dlukes/2b5c2a163cd8adba420aaae0c8ea2c00).
+krátký skript v Pythonu](https://gist.github.com/dlukes/2b5c2a163cd8adba420aaae0c8ea2c00).
 Kdybych mu chtěl udělat GUI (okýnkové rozhraní), musel bych se s tím
 patlat o něco déle, ale CLI je v podstatě hotové hned.
 
-Velkou předností příkazové řádky je, že umožňuje jednoduchou
-**spolupráci programů napsaných v různých programovacích jazycích**. V
-Pythonu pracujeme s datovými strukturami jako je seznam nebo slovník, na
+Velkou předností příkazové řádky je, že umožňuje snadnou **spolupráci
+programů napsaných v různých programovacích jazycích**. V Pythonu
+pracujeme s datovými strukturami jako je seznam nebo slovník, na
 příkazové řádce si programy navzájem posílají jen čistý text (resp.
 bajty), žádné složitější datové struktury.
 
@@ -71,7 +70,7 @@ příležitostně donuceni ji opustit a zmateně myšovat po běžných GUI
 aplikacích, protože mít všechno na dosah ruky na klávesnici je k
 nezaplacení ;)
 
-## Terminál a shell
+## Terminál, shell a příkazová řádka
 
 **Terminál** (emulátor terminálu) je program v počítači, který předstírá, že je
 [historický typ počítačové obrazovky ze 70.
@@ -88,12 +87,32 @@ jiné](https://www.cyberciti.biz/tips/bash-fix-the-display.html), výstup je
 nečitelný. Většinou stačí v těchto případech **poslepu napsat `reset` a
 zmáčknout `Enter`**.
 
-**Shell** (příkazová řádka) je první program, který se při otevření terminálu
+**Shell** je první program, který se při otevření terminálu
 spustí. Skrz něj můžeme spouštět další programy, různě je kombinovat apod.
 Shell se jmenuje proto, že je to taková skořápka, která obaluje všechny funkce
 nabízené počítačem a poskytuje k nim uživateli přístup. V tomto smyslu se někdy
 i o grafických rozhraních, jako je třeba prostředí Windows, mluví jako o
 (grafickém) shellu.
+
+**Příkazová řádka** je (jak je asi patrné už z názvu) řádek v terminálu,
+kde shell čeká na to, až napíšeme a spustíme nějaký příkaz.
+
+Jinými slovy, přísně vzato znamená každý z těchto pojmů něco trochu
+jiného. Přesto se v některých situacích používají zaměnitelně, např.
+pokyn může znít "Spusťte příkaz v terminálu / shellu / příkazové řádce"
+a myslí se tím totéž. Jindy se ale rozlišují, třeba když mluvíme o
+různých konkrétních shellech (např. [bash] vs. [fish]), tak není úplně
+adekvátní tyto programy označovat jako "terminály", protože terminály
+(resp. emulátory terminálu) jsou zas jiné programy (např. [GNOME
+Terminal], [Windows Terminal] aj.), které fungují jako prostředí, v němž
+shelly a další terminálové programy běží. Ale příliš se tím netrapte,
+důležité je tušit, že jsou to sice různé věci, ale často se můžou
+navzájem metonymicky zastupovat; zbytek většinou vyplyne z kontextu.
+
+[bash]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+[fish]: https://en.wikipedia.org/wiki/Fish_(Unix_shell)
+[GNOME Terminal]: https://en.wikipedia.org/wiki/GNOME_Terminal
+[Windows Terminal]: https://en.wikipedia.org/wiki/Windows_Terminal
 
 ## Adresářová struktura
 
@@ -196,7 +215,7 @@ grep pejsek pejsek_a_kocicka.txt | grep kočička
 
 Kromě programu `grep`, který umožňuje profiltrovat řádky vstupního textu na
 základě nějakého řetězce či regulárního výrazu, jsou pro práci s textovými
-soubory užitečné ještě následující programy:
+soubory užitečné ještě např. následující programy:
 
 - `cat`: spojí obsah více souborů za sebou a vytiskne ho na terminál (je
   pochopitelně možné použít i jen s jedním jediným souborem)

@@ -18,6 +18,8 @@ adresáře `.git` (v kořenovém adresáři repozitáře).
 
 Krátký interaktivní tutorial: <https://try.github.io/>
 
+Základy Gitu formou počítačové hry: <https://ohmygit.org/>
+
 Delší úvodní texty:
 
 - <https://www.learnenough.com/git-tutorial>
