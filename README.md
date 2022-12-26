@@ -10,8 +10,10 @@ Winter semester
 
 - [Basics -- a Python crash course](python_crash_course.ipynb)
 - [Make the most out of Jupyter notebooks](jupyter_magic.ipynb)
-- [Examining pronunciation variants with CMUdict](cmudict.ipynb)
+- [MATTR and TTR plots with Matplotlib](ttr_plots.ipynb)
+- [Dispersion plots with Altair and Pandas](dispersion_plots.ipynb)
 - [Plain text and Unicode](unicode.ipynb)
+- [Examining pronunciation variants with CMUdict](cmudict.ipynb)
 - [Regular expressions in Python](regex.ipynb)
 - [Computing collocation strength with the Dice score](collocations.ipynb)
 
@@ -32,6 +34,7 @@ Extra
 - [Speeding up with vectorization: a case study in document
   deduplication](deduplicate_vectorized.ipynb)
 - [Ever wondered how regular expressions work?](diy_regex.ipynb)
+- [Plotting basics with Zipf distributions](zipf_plots.ipynb)
 
 License
 -------
