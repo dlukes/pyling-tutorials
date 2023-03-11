@@ -16,7 +16,7 @@ adresáře `.git` (v kořenovém adresáři repozitáře).
 
 ## Odkazy
 
-Krátký interaktivní tutorial: <https://try.github.io/>
+Krátký interaktivní tutorial: <https://learngitbranching.js.org/>
 
 Základy Gitu formou počítačové hry: <https://ohmygit.org/>
 
