@@ -69,19 +69,20 @@ následující obsah:
 ```
 libovolné_jméno_adresáře
 ├── libovolné_jméno_modulu.py
-└── setup.py
+├── pyproject.toml
+└── README.md
 ```
 
 Soubor `libovolné_jméno_modulu.py` obsahuje váš kód, který chcete nainstalovat
 jako knihovnu a následně importovat: `import libovolné_jméno_modulu`.
-`setup.py` je standardní soubor, který definuje komponenty vaší knihovny a
+`pyproject.toml` je standardní soubor, který definuje komponenty vaší knihovny a
 nějaká dodatečná metadata. Když balíčkový manažer `pip` nalezne v adresáři
-soubor `setup.py`, pochopí, že se jedná o pythonovskou knihovnu, a podle
+soubor `pyproject.toml`, pochopí, že se jedná o pythonovskou knihovnu, a podle
 informací v tomto souboru se ji pokusí nainstalovat.
 
 Postupujeme tedy následovně: vytvoříme si nový adresář, třeba ve svém domácím
 adresáři, pojmenujeme ho např. `my_library`. V něm vytvoříme dva soubory,
-`mytools.py` a `setup.py`.
+`mytools.py` a `pyproject.toml`.
 
 Pomocí příkazové řádky by to vypadalo následovně:
 
@@ -91,7 +92,8 @@ cd
 mkdir my_library
 cd my_library
 touch mytools.py
-touch setup.py
+touch pyproject.toml
+touch README.md
 ```
 
 Ale můžeme tyto kroky provést i skrz klikací rozhraní Jupyteru.
@@ -120,48 +122,44 @@ def vert_sents(path):
     return sents
 ```
 
-Soubor `setup.py` pak metadata potřebná k instalaci knihovny:
+Soubor `pyproject.toml` pak metadata potřebná k instalaci knihovny:
 
-```python
-"""Popis modulu.
+```toml
+[project]
+# Jméno knihovny může být libovolné, v praxi je ale rozumné knihovnu
+# pojmenovat stejně jako její hlavní (v našem případě jediný) modul
+# nebo package. Při ``import``u pak ale vždy používáme jména modulů
+# (tj. souborů s příponou ``*.py``), ne toto jméno celé knihovny.
+name = "mytools"
+version = "0.0.1"
+description = "Různé užitečné nástroje"
+# Ke knihovnám bývá zvykem připojit soubor readme s alespoň zběžnými
+# informacemi o tom, jak knihovnu nainstalovat a používat.
+readme = "README.md"
+authors = [
+    {name = "David Lukeš"},
+]
+dependencies = [
+    # Sem lze vypsat jména knihoven, na kterých je ta vaše závislá a
+    # které se tudíž mají automaticky nainstalovat spolu s ní.
+    "nltk",
+]
+# Licence, pod níž je vaše knihovna dostupná. Více informací o
+# výběru licence (a o tom, k čemu jsou licence vůbec dobré)
+# naleznete zde: <https://choosealicense.com/>
+license = {text = "MIT"}
+# Vyžaduje vaše knihovna nějakou minimální verzi Pythonu?
+requires-python = ">=3.10"
 
-Uloží se do speciální proměnné __doc__, přes níž ho pak níže můžeme
-předat funkci ``setup()``.
+[project.urls]
+# Pokud má vaše knihovna nějakou webovou stránku.
+Homepage = "https://github.com/dlukes/mytools"
 
-"""
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
 
-from setuptools import setup, find_packages
-
-setup(
-    # jméno knihovny může být libovolné, v praxi je ale rozumné knihovnu
-    # pojmenovat stejně jako její hlavní (v našem případě jediný) modul
-    # nebo package. při ``import``u pak ale vždy používáme jména modulů
-    # (tj. souborů s příponou ``*.py``), ne toto jméno celé knihovny
-    name="mytools",
-    version="0.0.1",
-    description="Různé užitečné nástroje",
-    long_description=__doc__,
-    # pokud má vaše knihovna nějakou webovou stránku
-    url="https://github.com/dlukes/mytools",
-    author="David Lukeš",
-    # licence, pod níž je vaše knihovna dostupná. více informací o
-    # výběru licence (a o tom, k čemu jsou licence vůbec dobré)
-    # naleznete zde: <https://choosealicense.com/>
-    license="GPLv3",
-    install_requires=[
-        # sem lze vypsat jména knihoven, na kterých je ta vaše závislá a
-        # které je tudíž potřeba nainstalovat spolu s ní
-        "nltk"
-    ],
-    # tato funkce automaticky vyhledá všechny součásti vaší knihovny a
-    # postará se, aby byly správně nainstalovány
-    packages=find_packages(),
-    include_package_data=True,
-    # u většiny jednoduchých knihoven, které si člověk píše sám, lze
-    # jejich načítání trochu urychlit tím, že povolíme, aby byly na
-    # disku zazipovány do jednoho archivu
-    zip_safe=True
-)
+# Více viz https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html.
 ```
 
 (Některé tyto údaje pochopitelně nejsou povinné, mělo by být intuitivně jasné,
@@ -204,3 +202,5 @@ v paměti. Může tak vzniknout problém, pokud v knihovně objevíte při prác
 nějakou chybu, upravíte ji a chcete ji importovat znovu. V takovém případě je
 potřeba Python restartovat (tj. v případě notebooku použít funkci *Restart
 kernel*).
+
+<!-- vim: set tw=80: -->
